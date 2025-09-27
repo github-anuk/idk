@@ -1,5 +1,4 @@
 import streamlit as st
-import sounddevice as sd
 import soundfile as sf
 from pydub import AudioSegment
 import librosa
@@ -407,5 +406,6 @@ if uploaded_file and st.button("Upload & Analyze"):
             mfcc = extract_mfcc(wav_path)
             if mfcc is not None:
                 classify_audio(mfcc)
+
 
                 
