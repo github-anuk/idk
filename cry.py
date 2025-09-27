@@ -348,6 +348,40 @@ def speak_diagnosis(disease_name):
                 </audio>
             """, unsafe_allow_html=True)
 
+from streamlit_webrtc import webrtc_streamer, WebRtcMode
+import av
+import wave
+
+
+def record_audio():
+    st.subheader("🎙️ Record Your Cough")
+
+    class AudioProcessor:
+        def __init__(self):
+            self.frames = []
+
+        def recv(self, frame):
+            audio = frame.to_ndarray()
+            self.frames.append(audio)
+            return frame
+
+    # Start WebRTC stream
+    ctx = webrtc_streamer(
+        key="cough-recorder",
+        mode=WebRtcMode.SENDONLY,
+        audio_receiver_size=256,
+        media_stream_constraints={"audio": True, "video": False},
+        async_processing=True,
+        processor_factory=AudioProcessor,
+    )
+
+    # Simulated progress bar during recording
+    if ctx.state.playing:
+        st.info("🔴 Recording in progress...")
+        progress = st.progress(0)
+        for i in range(100):
+            time.sleep(0.05)  # ~5 seconds total
+            progress.progress(i + 1)
 
 
 # Convert any audio to WAV
@@ -411,19 +445,30 @@ def classify_audio(mfcc):
 
     return label_clean
 
+# Input method
+option = st.radio("Choose input method:", ["🎙️ Record Audio", "📁 Upload File"])
 
-uploaded_file = st.file_uploader("Upload .wav, .mp3, or .m4a", type=["wav", "mp3", "m4a"])
-if uploaded_file and st.button("Upload & Analyze"):
-    file_ext = uploaded_file.name.split(".")[-1].lower()
-    raw_path = os.path.join(TEST_DIR, f"uploaded.{file_ext}")
-    with open(raw_path, "wb") as f:
+if option == "🎙️ Record Audio":
+    duration = st.slider("Recording Duration (seconds)", 2, 10, 5)
+    if st.button("Start Recording"):
+        mp3_path = record_audio(duration=duration)
+        if mp3_path:
+            wav_path = convert_to_wav(mp3_path, "mp3")
+            if wav_path:
+                mfcc = extract_mfcc(wav_path)
+                if mfcc is not None:
+                    classify_audio(mfcc)
+
+elif option == "📁 Upload File":
+    uploaded_file = st.file_uploader("Upload .wav, .mp3, or .m4a", type=["wav", "mp3", "m4a"])
+    if uploaded_file and st.button("Upload & Analyze"):
+        file_ext = uploaded_file.name.split(".")[-1].lower()
+        raw_path = os.path.join(TEST_DIR, f"uploaded.{file_ext}")
+        with open(raw_path, "wb") as f:
             f.write(uploaded_file.read())
 
-    wav_path = raw_path if file_ext == "wav" else convert_to_wav(raw_path, file_ext)
-    if wav_path:
+        wav_path = raw_path if file_ext == "wav" else convert_to_wav(raw_path, file_ext)
+        if wav_path:
             mfcc = extract_mfcc(wav_path)
             if mfcc is not None:
                 classify_audio(mfcc)
-
-                
-                
