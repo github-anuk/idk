@@ -11,7 +11,7 @@ import os
 import time
 import base64
 st.markdown("""
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 """, unsafe_allow_html=True)
 
 import requests
@@ -414,5 +414,6 @@ if uploaded_file and st.button("Upload & Analyze"):
 
 
                 
+
 
 
