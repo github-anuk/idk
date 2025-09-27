@@ -24,6 +24,7 @@ def download_model_from_drive(file_id, destination):
 
 # Usage
 download_model_from_drive("1rkcX2WkO8zMFGK5mfvSWP5JHLeHy8mXn", "model.h5")
+
 # Constants
 MAX_PAD_LEN = 174
 DATA_DIR = "DATA"
@@ -173,7 +174,8 @@ with st.sidebar:
 st.markdown("""
     <div style='text-align: center; padding: 20px; border-bottom: 2px solid #00ffd5;'>
         <h1 style='color: #00ffd5;'>🩺 Cough Disease Analyzer</h1>
-        <p style='font-size: 18px; color: #ccc;'>Upload or record your cough to detect possible respiratory conditions.</p>
+        <p style='font-size: 18px; color: #ccc;'>From waveform to wellness—every breath tells a story.</p>
+        <p style='font-size: 18px; color: #ccc;'>this app is made using AI which cannot diagonis you, Please refer to a doctor for a proper diagonsis.</p>
     </div>
 """, unsafe_allow_html=True)
 
@@ -397,12 +399,6 @@ def classify_audio(mfcc):
     return label_clean
 
 
-# Input method
-option = st.radio("Choose input method:", ["🎙️ Record Audio", "📁 Upload File"])
-
-
-
-
 uploaded_file = st.file_uploader("Upload .wav, .mp3, or .m4a", type=["wav", "mp3", "m4a"])
 if uploaded_file and st.button("Upload & Analyze"):
     file_ext = uploaded_file.name.split(".")[-1].lower()
@@ -418,4 +414,5 @@ if uploaded_file and st.button("Upload & Analyze"):
 
 
                 
+
 
