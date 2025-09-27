@@ -256,62 +256,62 @@ def show_disease_card(disease_name):
     else:
         image_html = ""
 
-    # Inject Bootstrap + CSS styling
-    st.markdown("""
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        .card {
-            box-shadow: 0 0 15px #00bfff;
-            border-radius: 12px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .card:hover {
-            transform: scale(1.02);
-            box-shadow: 0 0 25px #00ffff;
-        }
-        .card-title {
-            font-size: 1.6rem;
-            font-weight: bold;
-            color: #00bfff;
-        }
-        .card-text {
-            font-size: 1rem;
-            color: #e0e0e0;
-        }
-        .btn-info {
-            background-color: #00bfff;
-            border: none;
-            font-weight: bold;
-        }
-        .btn-info:hover {
-            background-color: #00ffff;
-            color: black;
-        }
-    </style>
-    """, unsafe_allow_html=True)
-
-    import streamlit.components.v1 as components
-
-    # Build the full HTML string using f-string formatting
+    import streamlit.components.v1 as components 
     html_content = f"""
     <html>
-      <head>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-      </head>
-      <body>
-        <div style="display: flex; justify-content: center; padding-top: 20px;">
-          <div class="card text-white bg-dark mb-3" style="max-width: 30rem;">
-            {image_html}
-            <div class="card-body">
-              <h5 class="card-title">🩺 Prediction: {disease_name}</h5>
-              <p class="card-text">{info['desc']}</p>
-              <a href="{info['link']}" target="_blank" class="btn btn-info mt-3">🔎 Learn More</a>
+        <head>
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+            <style>
+                body {{
+                    background-color: #0b1f3f;
+                    padding-top: 40px;
+                    display: flex;
+                    justify-content: center;
+                    font-family: 'Segoe UI', sans-serif;
+                }}
+                .card {{
+                    background-color: #112d5c;
+                    color: white;
+                    border-radius: 12px;
+                    box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+                    transition: transform 0.3s ease, box-shadow 0.3s ease;
+                    max-width: 24rem;
+                }}
+                .card:hover {{
+                    transform: scale(1.03);
+                    box-shadow: 0 12px 24px rgba(0,0,0,0.5);
+                }}
+                .card-img-top {{
+                    height: 180px;
+                    object-fit: contain;
+                    background-color: transparent;
+                    padding: 10px;
+                    border-bottom: 1px solid #ccc;
+                }}
+                .btn-info {{
+                    font-weight: bold;
+                    background-color: #1e90ff;
+                    border: none;
+                    transition: background-color 0.3s ease;
+                }}
+                .btn-info:hover {{
+                    background-color: #63b3ed;
+                }}
+            </style>
+        </head>
+        <body>
+            <div class="card mb-3">
+                <img src="{image_html}" class="card-img-top" alt="Disease Icon">
+                <div class="card-body">
+                    <h5 class="card-title">🩺 Prediction: {disease_name}</h5>
+                    <p class="card-text">{info['desc']}</p>
+                    <a href="{info['link']}" target="_blank" class="btn btn-info mt-3">🔎 Learn More</a>
+                </div>
             </div>
-          </div>
-        </div>
-      </body>
+        </body>
     </html>
     """
+
 
     # Render it with components.html
     components.html(html_content, height=400)
@@ -425,4 +425,5 @@ if uploaded_file and st.button("Upload & Analyze"):
             if mfcc is not None:
                 classify_audio(mfcc)
 
+                
                 
