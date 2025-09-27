@@ -2,11 +2,9 @@ streamlit
 numpy
 scikit-learn
 librosa
-pydub
-gtts
 matplotlib
-soundfile
 tensorflow
-os
-time
-base64
+pydub
+soundfile
+sounddevice
+gtts
