@@ -11,7 +11,7 @@ import os
 import time
 import base64
 st.markdown("""
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 """, unsafe_allow_html=True)
 
 import requests
@@ -290,19 +290,32 @@ def show_disease_card(disease_name):
     </style>
     """, unsafe_allow_html=True)
 
-    # Display centered card
-    st.markdown(f"""
-    <div style="display: flex; justify-content: center; padding-top: 20px;">
-        <div class="card text-white bg-dark mb-3" style="max-width: 30rem;">
-          {image_html}
-          <div class="card-body">
-            <h5 class="card-title">🩺 Prediction: {disease_name}</h5>
-            <p class="card-text">{info['desc']}</p>
-            <a href="{info['link']}" target="_blank" class="btn btn-info mt-3">🔎 Learn More</a>
+    import streamlit.components.v1 as components
+
+    # Build the full HTML string using f-string formatting
+    html_content = f"""
+    <html>
+      <head>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+      </head>
+      <body>
+        <div style="display: flex; justify-content: center; padding-top: 20px;">
+          <div class="card text-white bg-dark mb-3" style="max-width: 30rem;">
+            {image_html}
+            <div class="card-body">
+              <h5 class="card-title">🩺 Prediction: {disease_name}</h5>
+              <p class="card-text">{info['desc']}</p>
+              <a href="{info['link']}" target="_blank" class="btn btn-info mt-3">🔎 Learn More</a>
+            </div>
           </div>
         </div>
-    </div>
-    """, unsafe_allow_html=True)
+      </body>
+    </html>
+    """
+
+    # Render it with components.html
+    components.html(html_content, height=400)
+
 
 from gtts import gTTS
 import tempfile
@@ -411,9 +424,3 @@ if uploaded_file and st.button("Upload & Analyze"):
             mfcc = extract_mfcc(wav_path)
             if mfcc is not None:
                 classify_audio(mfcc)
-
-
-                
-
-
-
