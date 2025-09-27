@@ -10,3 +10,5 @@ sounddevice
 gtts
 requests
 resampy
+streamlit-webrtc
+av
