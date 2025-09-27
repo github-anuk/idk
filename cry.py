@@ -346,20 +346,38 @@ def speak_diagnosis(disease_name):
                     <source src="data:audio/mp3;base64,{b64}" type="audio/mp3">
                 </audio>
             """, unsafe_allow_html=True)
+            
+def convert_to_wav(uploaded_file):
+    st.info("🔄 Converting to WAV format...")
 
+    # Save uploaded file temporarily
+    input_path = os.path.join("temp", uploaded_file.name)
+    with open(input_path, "wb") as f:
+        f.write(uploaded_file.read())
 
+    # Determine file type
+    ext = uploaded_file.name.split(".")[-1].lower()
+    output_path = input_path.replace(f".{ext}", ".wav")
 
-# Convert any audio to WAV
-def convert_to_wav(file_path, file_ext):
+    # Convert using pydub
     try:
-        audio = AudioSegment.from_file(file_path, format=file_ext)
-        wav_path = os.path.join(TEST_DIR, "converted.wav")
-        audio.export(wav_path, format="wav")
-        return wav_path
-    except Exception as e:
-        st.error(f"Conversion failed: {e}")
-        return None
+        if ext == "mp3":
+            audio = AudioSegment.from_mp3(input_path)
+        elif ext == "m4a":
+            audio = AudioSegment.from_file(input_path, format="m4a")
+        elif ext == "mp4":
+            audio = AudioSegment.from_file(input_path, format="mp4")
+        else:
+            st.error("❌ Unsupported file format.")
+            return None
 
+        audio.export(output_path, format="wav")
+        st.success("✅ Conversion complete!")
+        return output_path
+
+    except Exception as e:
+        st.error(f"❌ Conversion failed: {e}")
+        return None
 # Extract MFCC
 def extract_mfcc(file_path):
     try:
@@ -423,5 +441,6 @@ if uploaded_file and st.button("Upload & Analyze"):
             mfcc = extract_mfcc(wav_path)
             if mfcc is not None:
                 classify_audio(mfcc)
+
 
                 
