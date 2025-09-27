@@ -6,3 +6,7 @@ pydub
 gtts
 matplotlib
 soundfile
+tensorflow
+os
+time
+base64
