@@ -10,3 +10,4 @@ sounddevice
 gtts
 requests
 resampy
+sounddevice
