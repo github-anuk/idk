@@ -1,4 +1,5 @@
 import streamlit as st
+import sounddevice as sd
 import soundfile as sf
 from pydub import AudioSegment
 import librosa
@@ -349,6 +350,53 @@ def speak_diagnosis(disease_name):
             """, unsafe_allow_html=True)
 
 
+# Step 1: Filter input devices
+input_devices = []
+for i, dev in enumerate(sd.query_devices()):
+    if dev['max_input_channels'] > 0:
+        input_devices.append((i, dev['name']))
+
+# Step 2: Let user select
+device_labels = [f"[{i}] {name}" for i, name in input_devices]
+selected_label = st.selectbox("🎙️ Select your input device:", device_labels)
+selected_index = int(selected_label.split("]")[0][1:])
+
+# Step 3: Validate and record
+def record_audio(filename="recorded.mp3", duration=5, channels=1):
+    try:
+        sd.default.device = selected_index  # from dropdown
+        device_info = sd.query_devices(selected_index, 'input')
+        samplerate = int(device_info['default_samplerate'])
+
+        # Validate settings
+        sd.check_input_settings(device=selected_index, samplerate=samplerate, channels=channels)
+
+        st.info(f"🎙️ Recording started...")
+        progress = st.progress(0)
+
+        # Simulate progress bar
+        for i in range(duration * 10):
+            time.sleep(0.1)
+            progress.progress((i + 1) / (duration * 10))
+
+        recording = sd.rec(int(duration * samplerate), samplerate=samplerate, channels=channels)
+        sd.wait()
+
+        temp_wav = os.path.join(TEST_DIR, "temp.wav")
+        mp3_path = os.path.join(TEST_DIR, filename)
+        sf.write(temp_wav, recording, samplerate)
+
+        audio = AudioSegment.from_wav(temp_wav)
+        audio.export(mp3_path, format="mp3")
+
+        st.success(f"✅ Recording completed: {duration} seconds at {samplerate} Hz")
+        return mp3_path
+
+    except Exception as e:
+        st.error(f"Recording error: {e}")
+        return None
+
+
 
 # Convert any audio to WAV
 def convert_to_wav(file_path, file_ext):
@@ -411,16 +459,31 @@ def classify_audio(mfcc):
 
     return label_clean
 
+# Input method
+option = st.radio("Choose input method:", ["🎙️ Record Audio", "📁 Upload File"])
 
-uploaded_file = st.file_uploader("Upload .wav, .mp3, or .m4a", type=["wav", "mp3", "m4a"])
-if uploaded_file and st.button("Upload & Analyze"):
-    file_ext = uploaded_file.name.split(".")[-1].lower()
-    raw_path = os.path.join(TEST_DIR, f"uploaded.{file_ext}")
-    with open(raw_path, "wb") as f:
+if option == "🎙️ Record Audio":
+    duration = st.slider("Recording Duration (seconds)", 2, 10, 5)
+    if st.button("Start Recording"):
+        mp3_path = record_audio(duration=duration)
+        if mp3_path:
+            wav_path = convert_to_wav(mp3_path, "mp3")
+            if wav_path:
+                mfcc = extract_mfcc(wav_path)
+                if mfcc is not None:
+                    classify_audio(mfcc)
+
+elif option == "📁 Upload File":
+    uploaded_file = st.file_uploader("Upload .wav, .mp3, or .m4a", type=["wav", "mp3", "m4a"])
+    if uploaded_file and st.button("Upload & Analyze"):
+        file_ext = uploaded_file.name.split(".")[-1].lower()
+        raw_path = os.path.join(TEST_DIR, f"uploaded.{file_ext}")
+        with open(raw_path, "wb") as f:
             f.write(uploaded_file.read())
 
-    wav_path = raw_path if file_ext == "wav" else convert_to_wav(raw_path, file_ext)
-    if wav_path:
+        wav_path = raw_path if file_ext == "wav" else convert_to_wav(raw_path, file_ext)
+        if wav_path:
             mfcc = extract_mfcc(wav_path)
             if mfcc is not None:
                 classify_audio(mfcc)
+                
