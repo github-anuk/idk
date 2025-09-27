@@ -9,3 +9,4 @@ soundfile
 sounddevice
 gtts
 requests
+resampy
