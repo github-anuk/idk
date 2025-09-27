@@ -8,3 +8,4 @@ pydub
 soundfile
 sounddevice
 gtts
+requests
