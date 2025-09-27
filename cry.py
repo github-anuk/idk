@@ -14,7 +14,16 @@ st.markdown("""
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 """, unsafe_allow_html=True)
 
+import requests
 
+def download_model_from_drive(file_id, destination):
+    url = f"https://drive.google.com/uc?export=download&id={file_id}"
+    response = requests.get(url)
+    with open(destination, "wb") as f:
+        f.write(response.content)
+
+# Usage
+download_model_from_drive("1rkcX2WkO8zMFGK5mfvSWP5JHLeHy8mXn", "model.h5")
 # Constants
 MAX_PAD_LEN = 174
 DATA_DIR = "DATA"
@@ -409,3 +418,4 @@ if uploaded_file and st.button("Upload & Analyze"):
 
 
                 
+
