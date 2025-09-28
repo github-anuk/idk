@@ -347,6 +347,15 @@ def speak_diagnosis(disease_name):
                     <source src="data:audio/mp3;base64,{b64}" type="audio/mp3">
                 </audio>
             """, unsafe_allow_html=True)
+def record_audio():
+    st.subheader("🎙️ Record Your Cough")
+    audio_data = st.audio_input("Tap to record", type=["audio/wav", "audio/mpeg", "audio/mp4", "audio/x-m4a"])
+    if audio_data:
+        st.success("✅ Audio recorded!")
+        st.audio(audio_data)
+        return audio_data
+    return None
+
 
 # 📁 UPLOADING FUNCTION
 def upload_audio_file():
@@ -442,16 +451,9 @@ st.title("🫁 Breathe: Cough Classifier")
 st.subheader("🎙️ Choose Audio Input Method")
 option = st.radio("Select input method:", ["Record", "Upload"])
 
-if option == "Record":
-    def record_audio():
-        st.subheader("🎙️ Record Your Cough")
-        audio_data = st.audio_input("Tap to record", type=["audio/wav"])
-        if audio_data:
-            st.success("✅ Audio recorded!")
-            st.audio(audio_data)
-            return audio_data
-        return None
 
+audio_data = None
+if option == "Record":
     audio_data = record_audio()
 
 elif option == "Upload":
@@ -459,6 +461,7 @@ elif option == "Upload":
 
 if audio_path:
     prediction = classify_audio(audio_path)
+
 
 
 
