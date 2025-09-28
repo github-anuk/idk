@@ -349,7 +349,7 @@ def speak_diagnosis(disease_name):
             """, unsafe_allow_html=True)
 def record_audio():
     st.subheader("🎙️ Record Your Cough")
-    audio_data = st.audio_input("Tap to record"])
+    audio_data = st.audio_input("Tap to record")
     if audio_data:
         st.success("✅ Audio recorded!")
         st.audio(audio_data)
@@ -461,6 +461,7 @@ elif option == "Upload":
 
 if audio_path:
     prediction = classify_audio(audio_path)
+
 
 
 
