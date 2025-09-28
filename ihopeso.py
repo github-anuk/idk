@@ -448,19 +448,22 @@ def classify_audio(mfcc):
 st.set_page_config(page_title="Breathe", layout="centered")
 st.title("🫁 Breathe: Cough Classifier")
 
-st.subheader("🎙️ Choose Audio Input Method")
-option = st.radio("Select input method:", ["Record", "Upload"])
+audio_path = None  # ✅ Always initialize
 
+option = st.radio("Choose input method", ["Record", "Upload"])
 
-audio_data = None
 if option == "Record":
-    audio_data = record_audio()
-
+    audio_path = record_audio()
 elif option == "Upload":
     audio_path = upload_audio_file()
 
 if audio_path:
+    st.audio(audio_path)
     prediction = classify_audio(audio_path)
+    st.success(f"🩺 Prediction: {prediction}")
+
+
+
 
 
 
