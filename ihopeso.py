@@ -179,6 +179,9 @@ st.markdown("""
     </div>
 """, unsafe_allow_html=True)
 
+import streamlit.components.v1 as components
+
+
 def show_disease_card(disease_name):
     # Normalize disease name
     normalized_name = disease_name.strip().lower().replace("_", " ")
@@ -456,6 +459,7 @@ if audio_path:
     mfcc_features = extract_mfcc(audio_path)
     if mfcc_features is not None:
         prediction = classify_audio(mfcc_features)
+
 
 
 
