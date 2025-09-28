@@ -179,17 +179,13 @@ st.markdown("""
     </div>
 """, unsafe_allow_html=True)
 
-def show_disease_card(disease_name):
-    # Normalize disease name
-    normalized_name = disease_name.strip().lower().replace("_", " ")
-
     # Disease descriptions and links
     disease_info = {
         "asthma": {
             "desc": "A chronic condition causing inflammation and narrowing of the airways, leading to wheezing and shortness of breath.",
             "link": "https://www.who.int/news-room/fact-sheets/detail/asthma"
         },
-        "bronchitis": {
+         "bronchitis": {
             "desc": "Inflammation of the bronchial tubes, often caused by infection or irritants, resulting in coughing and mucus.",
             "link": "https://www.nhs.uk/conditions/bronchitis/"
         },
@@ -199,7 +195,7 @@ def show_disease_card(disease_name):
         },
         "pneumonia": {
             "desc": "An infection that inflames the air sacs in one or both lungs, which may fill with fluid.",
-            "link": "https://www.cdc.gov/pneumonia/index.html"
+        "   link": "https://www.cdc.gov/pneumonia/index.html"
         },
         "urti": {
             "desc": "Upper Respiratory Tract Infection—includes common cold, sinusitis, and laryngitis.",
@@ -225,14 +221,6 @@ def show_disease_card(disease_name):
             "desc": "Also known as whooping cough, a highly contagious bacterial infection causing severe coughing fits.",
             "link": "https://www.cdc.gov/pertussis/index.html"
         },
-        "flu": {
-            "desc": "Influenza—a viral infection causing fever, chills, and respiratory symptoms.",
-            "link": "https://www.cdc.gov/flu/index.htm"
-        },
-        "common cold": {
-            "desc": "A mild viral infection of the nose and throat, often causing sneezing and coughing.",
-            "link": "https://www.nhs.uk/conditions/common-cold/"
-        },
         "non cough": {
             "desc": "The input sound does not resemble a cough. Please try again with a clearer sample.",
             "link": "https://en.wikipedia.org/wiki/Cough"
@@ -245,18 +233,18 @@ def show_disease_card(disease_name):
         st.warning(f"⚠️ No description found for '{disease_name}'. Please check your labels or add it to the dictionary.")
         return
 
-    # Load image from local folder
+    # Load image from local folder (relative path for Streamlit Cloud)
     image_filename = f"{normalized_name.replace(' ', '_')}.png"
-    image_path = os.path.join(os.getcwd(), image_filename)
+    image_path = os.path.join("images", image_filename)  # assumes 'images/' folder is in repo
 
     if os.path.exists(image_path):
         with open(image_path, "rb") as f:
             encoded_image = base64.b64encode(f.read()).decode()
-        image_html = f'<img src="data:image/png;base64,{encoded_image}" class="card-img-top" alt="{disease_name}" style="width:100%; height:200px; object-fit:cover; border-radius:12px 12px 0 0;">'
+        image_tag = f'data:image/png;base64,{encoded_image}'
     else:
-        image_html = ""
+        image_tag = ""  # fallback: no image
 
-    import streamlit.components.v1 as components 
+    # HTML card with embedded image
     html_content = f"""
     <html>
         <head>
@@ -270,7 +258,7 @@ def show_disease_card(disease_name):
                     font-family: 'Segoe UI', sans-serif;
                 }}
                 .card {{
-                    background-color: #112d5c;
+                    background-color: rgba(0, 0, 0, 0);
                     color: white;
                     border-radius: 12px;
                     box-shadow: 0 8px 20px rgba(0,0,0,0.4);
@@ -301,7 +289,7 @@ def show_disease_card(disease_name):
         </head>
         <body>
             <div class="card mb-3">
-                <img src="{image_html}" class="card-img-top" alt="Disease Icon">
+                {"<img src='" + image_tag + "' class='card-img-top' alt='Disease Icon'>" if image_tag else ""}
                 <div class="card-body">
                     <h5 class="card-title">🩺 Prediction: {disease_name}</h5>
                     <p class="card-text">{info['desc']}</p>
@@ -312,8 +300,7 @@ def show_disease_card(disease_name):
     </html>
     """
 
-
-    # Render it with components.html
+    # Render it
     components.html(html_content, height=400)
 
 
@@ -466,6 +453,7 @@ if audio_path:
     mfcc_features = extract_mfcc(audio_path)
     if mfcc_features is not None:
         prediction = classify_audio(mfcc_features)
+
 
 
 
