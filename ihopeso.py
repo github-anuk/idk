@@ -396,17 +396,41 @@ def record_audio():
         st.info("🎤 Tap the mic to begin recording.")
         return None
 
+# 📁 UPLOADING FUNCTION
+def upload_audio_file():
+    uploaded_file = st.file_uploader("📁 Upload audio file", type=["wav", "mp3", "m4a", "mp4"])
+    if uploaded_file:
+        st.success("✅ File uploaded!")
 
+        file_ext = uploaded_file.name.split(".")[-1].lower()
+        with tempfile.NamedTemporaryFile(delete=False, suffix=f".{file_ext}") as f:
+            f.write(uploaded_file.read())
+            raw_path = f.name
 
-# Convert any audio to WAV
-def convert_to_wav(file_path, file_ext):
-    try:
-        audio = AudioSegment.from_file(file_path, format=file_ext)
-        wav_path = os.path.join(TEST_DIR, "converted.wav")
-        audio.export(wav_path, format="wav")
+        if file_ext == "wav":
+            wav_path = raw_path
+        else:
+            wav_path = raw_path.replace(f".{file_ext}", ".wav")
+            try:
+                if file_ext == "mp3":
+                    audio = AudioSegment.from_mp3(raw_path)
+                elif file_ext == "m4a":
+                    audio = AudioSegment.from_file(raw_path, format="m4a")
+                elif file_ext == "mp4":
+                    audio = AudioSegment.from_file(raw_path, format="mp4")
+                else:
+                    st.error("❌ Unsupported format.")
+                    return None
+                audio.export(wav_path, format="wav")
+            except Exception as e:
+                st.error(f"❌ Conversion failed: {e}")
+                return None
+
+        st.audio(wav_path)
+        st.info(f"📁 Saved as: {os.path.basename(wav_path)}")
         return wav_path
-    except Exception as e:
-        st.error(f"Conversion failed: {e}")
+    else:
+        st.info("📂 Waiting for file upload...")
         return None
 
 # Extract MFCC
@@ -460,42 +484,20 @@ def classify_audio(mfcc):
     return label_clean
 
 
-uploaded_file = st.file_uploader("Upload .wav, .mp3, or .m4a", type=["wav", "mp3", "m4a"])
-if uploaded_file and st.button("Upload & Analyze"):
-    file_ext = uploaded_file.name.split(".")[-1].lower()
-    raw_path = os.path.join(TEST_DIR, f"uploaded.{file_ext}")
-    with open(raw_path, "wb") as f:
-            f.write(uploaded_file.read())
+st.set_page_config(page_title="Breathe", layout="centered")
+st.title("🫁 Breathe: Cough Classifier")
 
-    wav_path = raw_path if file_ext == "wav" else convert_to_wav(raw_path, file_ext)
-    if wav_path:
-            mfcc = extract_mfcc(wav_path)
-            if mfcc is not None:
-                classify_audio(mfcc)
+st.subheader("🎙️ Choose Audio Input Method")
+option = st.radio("Select input method:", ["Record", "Upload"])
 
-option = st.radio("Choose input method:", ["🎙️ Record Audio", "📁 Upload File"])
+audio_path = None
+if option == "Record":
+    audio_path = record_audio()
+elif option == "Upload":
+    audio_path = upload_audio_file()
 
-if option == "🎙️ Record Audio":
-    duration = st.slider("Recording Duration (seconds)", 2, 10, 5)
-    if st.button("Start Recording"):
-        mp3_path = record_audio(duration=duration)
-        if mp3_path:
-            wav_path = convert_to_wav(mp3_path, "mp3")
-            if wav_path:
-                mfcc = extract_mfcc(wav_path)
-                if mfcc is not None:
-                    classify_audio(mfcc)
+if audio_path:
+    prediction = classify_audio(audio_path)
 
-elif option == "📁 Upload File":
-    uploaded_file = st.file_uploader("Upload .wav, .mp3, or .m4a", type=["wav", "mp3", "m4a"])
-    if uploaded_file and st.button("Upload & Analyze"):
-        file_ext = uploaded_file.name.split(".")[-1].lower()
-        raw_path = os.path.join(TEST_DIR, f"uploaded.{file_ext}")
-        with open(raw_path, "wb") as f:
-            f.write(uploaded_file.read())
 
-        wav_path = raw_path if file_ext == "wav" else convert_to_wav(raw_path, file_ext)
-        if wav_path:
-            mfcc = extract_mfcc(wav_path)
-            if mfcc is not None:
-                classify_audio(mfcc)
+
