@@ -417,39 +417,36 @@ def extract_mfcc(file_path):
     except Exception as e:
         st.error(f"❌ MFCC extraction failed: {e}")
         return None
-
+        
 def classify_audio(mfcc):
-    # Reshape input for model
-    mfcc = mfcc.reshape(1, 40, MAX_PAD_LEN, 1)
+    try:
+        # Ensure correct shape for model input
+        mfcc = mfcc.reshape(1, 40, MAX_PAD_LEN, 1)
 
-    # Make prediction
-    prediction = model.predict(mfcc)
-    predicted_label = encoder.inverse_transform([np.argmax(prediction)])[0]
+        # Make prediction
+        prediction = model.predict(mfcc)
+        predicted_label = encoder.inverse_transform([np.argmax(prediction)])[0]
 
-    # Normalize label for comparison
-    label_clean = str(predicted_label).lower().replace("-", "_").replace(" ", "_").strip()
+        # Normalize label for comparison
+        label_clean = str(predicted_label).lower().replace("-", "_").replace(" ", "_").strip()
 
+        # Handle non-cough case
+        if "non" in label_clean and "cough" in label_clean:
+            st.error("🔴 Please upload a valid cough file.")
+        else:
+            st.markdown(
+                f"<h3 style='color: #00ff99;'>🟢 Predicted Disease: <strong>{predicted_label}</strong></h3>",
+                unsafe_allow_html=True
+            )
+            show_disease_card(label_clean)
+            speak_diagnosis(label_clean)
 
+        return label_clean
 
-    # Handle non-cough case
-    if "non" in label_clean and "cough" in label_clean:
-        st.error("🔴 Please upload a valid cough file.")
-        show_disease_card(label_clean)
+    except Exception as e:
+        st.error(f"❌ Classification failed: {e}")
+        return None
 
-
-
-    else:
-        st.markdown(
-            f"<h3 style='color: #00ff99;'>🟢 Predicted Disease: <strong>{predicted_label}</strong></h3>",
-            unsafe_allow_html=True
-        )
-        show_disease_card(label_clean)
-        speak_diagnosis(label_clean)
-
-        
-        
-
-    return label_clean
 
 
 st.set_page_config(page_title="Breathe", layout="centered")
@@ -466,8 +463,10 @@ elif option == "Upload":
 
 if audio_path:
     st.audio(audio_path)
-    prediction = classify_audio(audio_path)
-    st.success(f"🩺 Prediction: {prediction}")
+    mfcc_features = extract_mfcc(audio_path)
+    if mfcc_features is not None:
+        prediction = classify_audio(mfcc_features)
+
 
 
 
