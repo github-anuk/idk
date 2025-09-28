@@ -348,15 +348,6 @@ def speak_diagnosis(disease_name):
                 </audio>
             """, unsafe_allow_html=True)
 
-import streamlit as st
-
-st.title("🎙️ Test Audio Input")
-
-audio_data = st.audio_input("Tap to record", type=["audio/wav"])
-if audio_data:
-    st.success("✅ Audio recorded!")
-    st.audio(audio_data)
-
 # 📁 UPLOADING FUNCTION
 def upload_audio_file():
     uploaded_file = st.file_uploader("📁 Upload audio file", type=["wav", "mp3", "m4a", "mp4"])
@@ -451,14 +442,24 @@ st.title("🫁 Breathe: Cough Classifier")
 st.subheader("🎙️ Choose Audio Input Method")
 option = st.radio("Select input method:", ["Record", "Upload"])
 
-audio_path = None
 if option == "Record":
-    audio_path = record_audio()
+    def record_audio():
+        st.subheader("🎙️ Record Your Cough")
+        audio_data = st.audio_input("Tap to record", type=["audio/wav"])
+        if audio_data:
+            st.success("✅ Audio recorded!")
+            st.audio(audio_data)
+            return audio_data
+        return None
+
+    audio_data = record_audio()
+
 elif option == "Upload":
     audio_path = upload_audio_file()
 
 if audio_path:
     prediction = classify_audio(audio_path)
+
 
 
 
