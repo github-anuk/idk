@@ -349,52 +349,13 @@ def speak_diagnosis(disease_name):
             """, unsafe_allow_html=True)
 
 import streamlit as st
-import tempfile
-import os
-from pydub import AudioSegment
 
-def record_audio():
-    st.subheader("🎙️ Record Your Cough")
+st.title("🎙️ Test Audio Input")
 
-    audio_data = st.audio_input("Tap to record", type=["audio/wav"])
-
-    if audio_data:
-        st.success("✅ Audio recorded!")
-
-        # Save uploaded file temporarily
-        file_ext = audio_data.name.split(".")[-1].lower()
-        with tempfile.NamedTemporaryFile(delete=False, suffix=f".{file_ext}") as f:
-            f.write(audio_data.read())
-            raw_path = f.name
-
-        # Convert to .wav if needed
-        if file_ext == "wav":
-            wav_path = raw_path
-        else:
-            wav_path = raw_path.replace(f".{file_ext}", ".wav")
-            try:
-                if file_ext == "mp3":
-                    audio = AudioSegment.from_mp3(raw_path)
-                elif file_ext == "m4a":
-                    audio = AudioSegment.from_file(raw_path, format="m4a")
-                elif file_ext == "mp4":
-                    audio = AudioSegment.from_file(raw_path, format="mp4")
-                else:
-                    st.error("❌ Unsupported format.")
-                    return None
-
-                audio.export(wav_path, format="wav")
-            except Exception as e:
-                st.error(f"❌ Conversion failed: {e}")
-                return None
-
-        st.audio(wav_path)
-        st.info(f"📁 Saved as: {os.path.basename(wav_path)}")
-        return wav_path
-
-    else:
-        st.info("🎤 Tap the mic to begin recording.")
-        return None
+audio_data = st.audio_input("Tap to record", type=["audio/wav"])
+if audio_data:
+    st.success("✅ Audio recorded!")
+    st.audio(audio_data)
 
 # 📁 UPLOADING FUNCTION
 def upload_audio_file():
@@ -498,6 +459,7 @@ elif option == "Upload":
 
 if audio_path:
     prediction = classify_audio(audio_path)
+
 
 
 
