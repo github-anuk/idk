@@ -394,22 +394,29 @@ def upload_audio_file():
         st.info("📂 Waiting for file upload...")
         return None
 
-# Extract MFCC
 def extract_mfcc(file_path):
     try:
+        # Load audio file
         audio, sample_rate = librosa.load(file_path, res_type='kaiser_fast')
+
+        # Extract 40 MFCCs
         mfccs = librosa.feature.mfcc(y=audio, sr=sample_rate, n_mfcc=40)
+
+        # Pad or truncate to MAX_PAD_LEN
         if mfccs.shape[1] < MAX_PAD_LEN:
             pad_width = MAX_PAD_LEN - mfccs.shape[1]
             mfccs = np.pad(mfccs, pad_width=((0, 0), (0, pad_width)), mode='constant')
         else:
             mfccs = mfccs[:, :MAX_PAD_LEN]
+
+        # Reshape to (1, 40, MAX_PAD_LEN, 1)
+        mfccs = mfccs.reshape(1, 40, MAX_PAD_LEN, 1)
+
         return mfccs
+
     except Exception as e:
-        st.error(f"MFCC extraction failed: {e}")
+        st.error(f"❌ MFCC extraction failed: {e}")
         return None
-
-
 
 def classify_audio(mfcc):
     # Reshape input for model
@@ -461,6 +468,7 @@ if audio_path:
     st.audio(audio_path)
     prediction = classify_audio(audio_path)
     st.success(f"🩺 Prediction: {prediction}")
+
 
 
 
