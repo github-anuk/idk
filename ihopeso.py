@@ -59,9 +59,8 @@ disease_images = {
     
 }
 
-# COLOR
 st.markdown("""
- <style>
+<style>
     body, .stApp {
         background: linear-gradient(to right, #0b0f1a, #1a1f2e, #003153);
         color: #f0f0f0;
@@ -72,8 +71,55 @@ st.markdown("""
         color: #f0f0f0 !important;
     }
 
+    .main-container {
+        max-width: 1000px;
+        margin: auto;
+        padding: 20px;
+    }
+
+    .prediction-card {
+        background-color: rgba(255, 255, 255, 0.05);
+        border-radius: 16px;
+        box-shadow: 0 8px 24px rgba(0, 255, 213, 0.2);
+        padding: 20px;
+        margin-top: 20px;
+        transition: transform 0.3s ease;
+    }
+
+    .prediction-card:hover {
+        transform: scale(1.01);
+    }
+
+    .prediction-title {
+        font-size: 2rem;
+        color: #00ffd5;
+        margin-bottom: 10px;
+    }
+
+    .prediction-desc {
+        font-size: 1.1rem;
+        line-height: 1.6;
+        color: #cccccc;
+    }
+
+    .learn-btn {
+        background-color: #1e90ff;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: bold;
+        display: inline-block;
+        margin-top: 20px;
+        transition: background-color 0.3s ease;
+    }
+
+    .learn-btn:hover {
+        background-color: #63b3ed;
+    }
+
     .stButton>button {
-        background-color: #003153;  /* Prussian blue */
+        background-color: #003153;
         color: white;
         border: none;
         padding: 0.6em 1.4em;
@@ -81,38 +127,17 @@ st.markdown("""
         font-weight: bold;
         transition: background-color 0.3s ease;
         box-shadow: 0 0 10px #00bfff;
+        animation: pulse 2s infinite;
     }
 
     .stButton>button:hover {
         background-color: #005f8f;
-        color: #ffffff;
         box-shadow: 0 0 12px #00ffd5;
     }
 
     .stRadio label {
         color: #00ffd5 !important;
         font-weight: bold;
-    }
-
-    .stSlider .css-1y4p8pa {
-        color: #ff6b6b !important;
-    }
-
-    .stMarkdown {
-        color: #f0f0f0 !important;
-    }
-
-    .stSidebar {
-        background-color: #111827;
-        border-right: 2px solid #003153;
-    }
-
-    .stSidebar h1, .stSidebar h2, .stSidebar h3, .stSidebar h4 {
-        color: #00bfff !important;
-    }
-
-    .stSidebar p {
-        color: #cccccc !important;
     }
 
     .stImage img {
@@ -140,15 +165,9 @@ st.markdown("""
         border-left: 5px solid #00bfff;
     }
 
-    /* Add a fun accent to headers */
     h1::after {
         content: ' ✨';
         color: #ffcc00;
-    }
-
-    /* Add subtle animation to buttons */
-    .stButton>button {
-        animation: pulse 2s infinite;
     }
 
     @keyframes pulse {
@@ -156,8 +175,21 @@ st.markdown("""
         50% { box-shadow: 0 0 20px #00ffd5; }
         100% { box-shadow: 0 0 10px #00bfff; }
     }
-    </style>
+
+    @media screen and (max-width: 768px) {
+        .main-container {
+            padding: 10px;
+        }
+        .prediction-title {
+            font-size: 1.5rem;
+        }
+        .prediction-desc {
+            font-size: 1rem;
+        }
+    }
+</style>
 """, unsafe_allow_html=True)
+
 
 # 🧠 Sidebar Instructions
 with st.sidebar:
@@ -253,58 +285,81 @@ def show_disease_card(disease_name):
     # HTML card with embedded image
     html_content = f"""
     <html>
-        <head>
-            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-            <style>
-                body {{
-                    background-color: #0b1f3f;
-                    padding-top: 40px;
-                    display: flex;
-                    justify-content: center;
-                    font-family: 'Segoe UI', sans-serif;
-                }}
-                .card {{
-                    background-color: rgba(0, 0, 0, 0);
-                    color: white;
-                    border-radius: 12px;
-                    box-shadow: 0 8px 20px rgba(0,0,0,0.4);
-                    transition: transform 0.3s ease, box-shadow 0.3s ease;
-                    max-width: 24rem;
-                }}
-                .card:hover {{
-                    transform: scale(1.03);
-                    box-shadow: 0 12px 24px rgba(0,0,0,0.5);
-                }}
-                .card-img-top {{
-                    height: 180px;
-                    object-fit: contain;
-                    background-color: transparent;
-                    padding: 10px;
-                    border-bottom: 1px solid #ccc;
-                }}
-                .btn-info {{
-                    font-weight: bold;
-                    background-color: #1e90ff;
-                    border: none;
-                    transition: background-color 0.3s ease;
-                }}
-                .btn-info:hover {{
-                    background-color: #63b3ed;
-                }}
-            </style>
-        </head>
-        <body>
-            <div class="card mb-3">
-                {"<img src='" + image_tag + "' class='card-img-top' alt='Disease Icon'>" if image_tag else ""}
-                <div class="card-body">
-                    <h5 class="card-title">🩺 Prediction: {disease_name}</h5>
-                    <p class="card-text">{info['desc']}</p>
-                    <a href="{info['link']}" target="_blank" class="btn btn-info mt-3">🔎 Learn More</a>
-                </div>
+    <head>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+        <style>
+            body {{
+                background-color: #0b1f3f;
+                font-family: 'Segoe UI', sans-serif;
+                padding: 40px;
+                display: flex;
+                justify-content: center;
+            }}
+            .diagnostic-card {{
+                display: flex;
+                flex-direction: row;
+                background: linear-gradient(to right, #0b0f1a, #1a1f2e, #003153);
+                color: white;
+                border-radius: 16px;
+                box-shadow: 0 10px 30px rgba(0,255,213,0.2);
+                max-width: 900px;
+                width: 100%;
+                overflow: hidden;
+                transition: transform 0.3s ease;
+            }}
+            .diagnostic-card:hover {{
+                transform: scale(1.01);
+            }}
+            .card-img {{
+                width: 40%;
+                object-fit: contain;
+                background-color: #0b1f3f;
+                padding: 20px;
+                border-right: 1px solid #003153;
+            }}
+            .card-body {{
+                padding: 30px;
+                width: 60%;
+            }}
+            .card-title {{
+                font-size: 2rem;
+                color: #00ffd5;
+                margin-bottom: 10px;
+            }}
+            .card-text {{
+                font-size: 1.1rem;
+                line-height: 1.6;
+                color: #cccccc;
+            }}
+            .btn-info {{
+                margin-top: 20px;
+                font-weight: bold;
+                background-color: #1e90ff;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 8px;
+               text-decoration: none;
+                color: white;
+                display: inline-block;
+            }}
+            .btn-info:hover {{
+                background-color: #63b3ed;
+            }}
+        </style>
+    </head>
+    <body>
+        <div class="diagnostic-card">
+            {"<img src='" + image_tag + "' class='card-img' alt='Disease Image'>" if image_tag else ""}
+            <div class="card-body">
+                <h2 class="card-title">🩺 Prediction: {disease_name}</h2>
+                <p class="card-text">{info['desc']}</p>
+                <a href="{info['link']}" target="_blank" class="btn-info">🔎 Learn More</a>
             </div>
-        </body>
+        </div>
+    </body>
     </html>
     """
+
 
     # Render it
     components.html(html_content, height=400)
@@ -443,8 +498,6 @@ def classify_audio(mfcc):
 
 
 st.set_page_config(page_title="Breathe", layout="centered")
-st.title("🫁 Breathe: Cough Classifier")
-
 audio_path = None  # ✅ Always initialize
 
 option = st.radio("Choose input method", ["Record", "Upload"])
@@ -459,19 +512,6 @@ if audio_path:
     mfcc_features = extract_mfcc(audio_path)
     if mfcc_features is not None:
         prediction = classify_audio(mfcc_features)
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
