@@ -207,9 +207,17 @@ st.markdown("""
     <div style='text-align: center; padding: 20px; border-bottom: 2px solid #00ffd5;'>
         <h1 style='color: #00ffd5;'>🩺 Cough Disease Analyzer</h1>
         <p style='font-size: 18px; color: #ccc;'>From waveform to wellness—every breath tells a story.</p>
-        <p style='font-size: 18px; color: #ccc;'>this app is made using AI which cannot diagonis you, Please refer to a doctor for a proper diagonsis.</p>
     </div>
 """, unsafe_allow_html=True)
+
+st.markdown("""
+    <div class="footer">
+        <p style='font-size: 18px; color: #ccc;'>this app is made using AI which cannot diagonis you, Please refer to a doctor for a proper diagonsis.</p>
+        Built with ❤️ using Python, Streamlit, and CNNs<br>
+        Developed by Anu · <a href="https://github.com/your-repo" style="color:#63b3ed;">GitHub</a>
+    </div>
+""", unsafe_allow_html=True)
+
 
 import streamlit.components.v1 as components
 
@@ -512,6 +520,7 @@ if audio_path:
     mfcc_features = extract_mfcc(audio_path)
     if mfcc_features is not None:
         prediction = classify_audio(mfcc_features)
+
 
 
 
