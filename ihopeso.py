@@ -210,13 +210,6 @@ st.markdown("""
     </div>
 """, unsafe_allow_html=True)
 
-st.markdown("""
-    <div class="footer">
-        <p style='font-size: 18px; color: #ccc;'>this app is made using AI which cannot diagonis you, Please refer to a doctor for a proper diagonsis.</p>
-        Built with ❤️ using Python, Streamlit, and CNNs<br>
-        Developed by Anu · <a href="https://github.com/your-repo" style="color:#63b3ed;">GitHub</a>
-    </div>
-""", unsafe_allow_html=True)
 
 
 import streamlit.components.v1 as components
@@ -520,6 +513,14 @@ if audio_path:
     mfcc_features = extract_mfcc(audio_path)
     if mfcc_features is not None:
         prediction = classify_audio(mfcc_features)
+
+st.markdown("""
+    <hr style="border: none; height: 2px; background: linear-gradient(to right, #00ffd5, #00bfff); margin-top: 40px;">
+
+    <div style="text-align: center; padding: 20px; font-size: 0.9rem; color: #cccccc;">
+        Built with ❤️ by Anu · Powered by Streamlit · <a href="https://github.com/your-repo" target="_blank" style="color:#00ffd5; text-decoration: none;">GitHub</a>
+    </div>
+""", unsafe_allow_html=True)
 
 
 
