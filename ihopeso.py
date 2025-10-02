@@ -62,92 +62,59 @@ disease_images = {
 st.markdown("""
 <style>
     body, .stApp {
-        background: linear-gradient(to right, #0b0f1a, #1a1f2e, #003153);
-        color: #f0f0f0;
+        background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
         font-family: 'Segoe UI', sans-serif;
+        color: #e0f7fa;
     }
 
-    h1, h2, h3, h4, h5, h6, p, div, span {
-        color: #f0f0f0 !important;
+    h1, h2, h3, h4, h5, h6 {
+        color: #00ffff !important;
+        text-shadow: 0 0 10px #00ffff;
     }
 
-    .main-container {
-        max-width: 1000px;
-        margin: auto;
-        padding: 20px;
-    }
-
-    .prediction-card {
-        background-color: rgba(255, 255, 255, 0.05);
-        border-radius: 16px;
-        box-shadow: 0 8px 24px rgba(0, 255, 213, 0.2);
-        padding: 20px;
-        margin-top: 20px;
-        transition: transform 0.3s ease;
-    }
-
-    .prediction-card:hover {
-        transform: scale(1.01);
-    }
-
-    .prediction-title {
-        font-size: 2rem;
-        color: #00ffd5;
-        margin-bottom: 10px;
-    }
-
-    .prediction-desc {
-        font-size: 1.1rem;
-        line-height: 1.6;
-        color: #cccccc;
-    }
-
-    .learn-btn {
-        background-color: #1e90ff;
-        color: white;
-        padding: 10px 20px;
-        border-radius: 8px;
-        text-decoration: none;
-        font-weight: bold;
-        display: inline-block;
-        margin-top: 20px;
-        transition: background-color 0.3s ease;
-    }
-
-    .learn-btn:hover {
-        background-color: #63b3ed;
+    .stMarkdown, .stText, .stRadio label, .stSelectbox label, .stSlider label {
+        color: #e0f7fa !important;
     }
 
     .stButton>button {
-        background-color: #003153;
-        color: white;
+        background-color: #00ffff;
+        color: #003153;
+        font-weight: bold;
         border: none;
         padding: 0.6em 1.4em;
         border-radius: 10px;
-        font-weight: bold;
-        transition: background-color 0.3s ease;
-        box-shadow: 0 0 10px #00bfff;
-        animation: pulse 2s infinite;
+        box-shadow: 0 0 12px #00ffff;
+        transition: background-color 0.3s ease, box-shadow 0.3s ease;
     }
 
     .stButton>button:hover {
-        background-color: #005f8f;
-        box-shadow: 0 0 12px #00ffd5;
+        background-color: #00e6e6;
+        box-shadow: 0 0 16px #00ffff;
+        color: #001f2e;
     }
 
-    .stRadio label {
-        color: #00ffd5 !important;
-        font-weight: bold;
+    .stSidebar {
+        background-color: #001f2e;
+        border-right: 2px solid #00ffff;
+    }
+
+    .stSidebar h1, .stSidebar h2, .stSidebar h3 {
+        color: #00ffff !important;
+    }
+
+    .stSidebar p {
+        color: #e0f7fa !important;
     }
 
     .stImage img {
         border-radius: 12px;
-        box-shadow: 0 0 12px #00bfff;
+        box-shadow: 0 0 16px #00ffff;
     }
 
     .stAlert {
         border-radius: 10px;
         padding: 1em;
+        font-weight: bold;
     }
 
     .stAlert[data-testid="stAlert-error"] {
@@ -157,39 +124,50 @@ st.markdown("""
 
     .stAlert[data-testid="stAlert-success"] {
         background-color: #0f2c1f;
-        border-left: 5px solid #00ffd5;
+        border-left: 5px solid #00ffff;
     }
 
     .stAlert[data-testid="stAlert-info"] {
         background-color: #0f1f2c;
-        border-left: 5px solid #00bfff;
+        border-left: 5px solid #00ffff;
     }
 
+    .footer {
+        text-align: center;
+        padding: 20px;
+        font-size: 0.9rem;
+        color: #e0f7fa;
+        margin-top: 40px;
+        border-top: 2px solid #00ffff;
+    }
+
+    .footer a {
+        color: #00ffff;
+        text-decoration: none;
+    }
+
+    .footer a:hover {
+        text-decoration: underline;
+    }
+
+    /* Accent glow for headers */
     h1::after {
         content: ' ✨';
         color: #ffcc00;
     }
 
+    /* Pulse animation for buttons */
     @keyframes pulse {
-        0% { box-shadow: 0 0 10px #00bfff; }
-        50% { box-shadow: 0 0 20px #00ffd5; }
-        100% { box-shadow: 0 0 10px #00bfff; }
+        0% { box-shadow: 0 0 10px #00ffff; }
+        50% { box-shadow: 0 0 20px #00e6e6; }
+        100% { box-shadow: 0 0 10px #00ffff; }
     }
 
-    @media screen and (max-width: 768px) {
-        .main-container {
-            padding: 10px;
-        }
-        .prediction-title {
-            font-size: 1.5rem;
-        }
-        .prediction-desc {
-            font-size: 1rem;
-        }
+    .stButton>button {
+        animation: pulse 2s infinite;
     }
 </style>
 """, unsafe_allow_html=True)
-
 
 # 🧠 Sidebar Instructions
 with st.sidebar:
@@ -522,6 +500,7 @@ st.markdown("""
         Built with ❤️ by Anu · Powered by Streamlit · <a href="https://github.com/your-repo" target="_blank" style="color:#00ffd5; text-decoration: none;">GitHub</a>
     </div>
 """, unsafe_allow_html=True)
+
 
 
 
