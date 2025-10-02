@@ -206,7 +206,7 @@ def show_disease_card(disease_name):
         },
         "pneumonia": {
             "desc": "An infection that inflames the air sacs in one or both lungs, which may fill with fluid.",
-        "   link": "https://www.who.int/news-room/fact-sheets/detail/pneumonia"
+            "link": "https://www.who.int/news-room/fact-sheets/detail/pneumonia"
         },
         "urti": {
             "desc": "Upper Respiratory Tract Infection—includes common cold, sinusitis, and laryngitis.",
@@ -494,6 +494,7 @@ st.markdown("""
         Built with ❤️ by Anu · Powered by Streamlit · <a href="https://github.com/your-repo" target="_blank" style="color:#00ffd5; text-decoration: none;">GitHub</a>
     </div>
 """, unsafe_allow_html=True)
+
 
 
 
