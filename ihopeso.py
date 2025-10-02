@@ -62,7 +62,7 @@ disease_images = {
 st.markdown("""
 <style>
     body, .stApp {
-        background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+        background: linear-gradient(to right, #1a2733, #2c3e50, #375a6c);
         font-family: 'Segoe UI', sans-serif;
         color: #e0f7fa;
     }
@@ -85,6 +85,7 @@ st.markdown("""
         border-radius: 10px;
         box-shadow: 0 0 12px #00ffff;
         transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        animation: pulse 2s infinite;
     }
 
     .stButton>button:hover {
@@ -99,7 +100,7 @@ st.markdown("""
     }
 
     .stSidebar h1, .stSidebar h2, .stSidebar h3 {
-        color: #00ffff !important;
+        color: #ffffff !important;
     }
 
     .stSidebar p {
@@ -150,21 +151,15 @@ st.markdown("""
         text-decoration: underline;
     }
 
-    /* Accent glow for headers */
     h1::after {
         content: ' ✨';
         color: #ffcc00;
     }
 
-    /* Pulse animation for buttons */
     @keyframes pulse {
         0% { box-shadow: 0 0 10px #00ffff; }
         50% { box-shadow: 0 0 20px #00e6e6; }
         100% { box-shadow: 0 0 10px #00ffff; }
-    }
-
-    .stButton>button {
-        animation: pulse 2s infinite;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -500,6 +495,7 @@ st.markdown("""
         Built with ❤️ by Anu · Powered by Streamlit · <a href="https://github.com/your-repo" target="_blank" style="color:#00ffd5; text-decoration: none;">GitHub</a>
     </div>
 """, unsafe_allow_html=True)
+
 
 
 
