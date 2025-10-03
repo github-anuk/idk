@@ -62,92 +62,97 @@ disease_images = {
 st.markdown("""
 <style>
     body, .stApp {
-        background: linear-gradient(to right, #e0f7fa, #cceeff, #b3e5fc);
+        background: radial-gradient(circle at top left, #0b0f1a, #1a1f2e, #000000);
+        background-image: url('https://www.transparenttextures.com/patterns/stardust.png');
         font-family: 'Segoe UI', sans-serif;
-        color: #003153;
+        color: #ffffff;
     }
 
     h1, h2, h3, h4, h5, h6 {
-        color:  #000000 !important;
+        color: #ffffff !important;
+        font-weight: bold;
+        text-shadow: 0 0 12px #00ffff;
     }
 
-    .stMarkdown, .stText, .stRadio label, .stSelectbox label, .stSlider label {
-        color: #003153 !important;
+    p, div, span, label, .stMarkdown, .stText, .stRadio label, .stSelectbox label, .stSlider label {
+        color: #ffffff !important;
+        font-weight: bold;
     }
 
     .stButton>button {
-        background-color: #00e6ff;
-        color: #003153;
+        background-color: #00ffff;
+        color: #000000;
         font-weight: bold;
         border: none;
         padding: 0.6em 1.4em;
         border-radius: 10px;
-        box-shadow: 0 0 14px #00e6ff;
+        box-shadow: 0 0 14px #00ffff;
         transition: background-color 0.3s ease, box-shadow 0.3s ease;
         animation: pulse 2s infinite;
     }
 
     .stButton>button:hover {
-        background-color: #80faff;
-        box-shadow: 0 0 18px #00e6ff;
-        color: #001f2e;
+        background-color: #00e6e6;
+        box-shadow: 0 0 18px #00ffff;
+        color: #000000;
     }
 
     .stSidebar {
-        background-color: #e0f7fa;
-        border-right: 2px solid #00e6ff;
+        background-color: #0b0f1a;
+        border-right: 2px solid #00ffff;
     }
 
     .stSidebar h1, .stSidebar h2, .stSidebar h3 {
-        color: #003153 !important;
+        color: #ffffff !important;
+        font-weight: bold;
     }
 
     .stSidebar p {
-        color: #003153 !important;
+        color: #ffffff !important;
+        font-weight: bold;
     }
 
     .stImage img {
         border-radius: 12px;
-        box-shadow: 0 0 16px #00e6ff;
+        box-shadow: 0 0 16px #00ffff;
     }
 
     .stAlert {
         border-radius: 10px;
         padding: 1em;
         font-weight: bold;
+        color: #ffffff !important;
     }
 
     .stAlert[data-testid="stAlert-error"] {
-        background-color: #ffe6e6;
+        background-color: #2c0f0f;
         border-left: 5px solid #ff4e50;
-        color: #990000;
     }
 
     .stAlert[data-testid="stAlert-success"] {
-        background-color: #e6fff9;
-        border-left: 5px solid #00e6ff;
-        color: #003153;
+        background-color: #0f2c1f;
+        border-left: 5px solid #00ffff;
     }
 
     .stAlert[data-testid="stAlert-info"] {
-        background-color: #e6f7ff;
-        border-left: 5px solid #00e6ff;
-        color: #003153;
+        background-color: #0f1f2c;
+        border-left: 5px solid #00ffff;
     }
 
     .footer {
         text-align: center;
         padding: 20px;
         font-size: 0.9rem;
-        color: #003153;
+        color: #ffffff;
         margin-top: 40px;
-        border-top: 2px solid #00e6ff;
-        background-color: #f0fcff;
+        border-top: 2px solid #00ffff;
+        background-color: #1a1f2e;
     }
 
     .footer a {
-        color: #00e6ff;
+        color: #00ffff;
         text-decoration: none;
+        font-weight: bold;
     }
 
     .footer a:hover {
@@ -155,18 +160,17 @@ st.markdown("""
     }
 
     h1::after {
-        content: ' ❄️';
-        color: #00e6ff;
+        content: ' 🌌';
+        color: #00ffff;
     }
 
     @keyframes pulse {
-        0% { box-shadow: 0 0 10px #00e6ff; }
-        50% { box-shadow: 0 0 20px #80faff; }
-        100% { box-shadow: 0 0 10px #00e6ff; }
+        0% { box-shadow: 0 0 10px #00ffff; }
+        50% { box-shadow: 0 0 20px #00e6e6; }
+        100% { box-shadow: 0 0 10px #00ffff; }
     }
 </style>
 """, unsafe_allow_html=True)
-
 # 🧠 Sidebar Instructions
 with st.sidebar:
     st.header("🧠 How It Works")
@@ -498,6 +502,7 @@ st.markdown("""
         Built with ❤️ by Anu · Powered by Streamlit · <a href="https://github.com/your-repo" target="_blank" style="color:#00ffd5; text-decoration: none;">GitHub</a>
     </div>
 """, unsafe_allow_html=True)
+
 
 
 
