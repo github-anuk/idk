@@ -63,7 +63,7 @@ st.markdown("""
 <style>
     body, .stApp {
         background: radial-gradient(circle at top left, #0b0f1a, #1a1f2e, #000000);
-        background-image: url('https://png.pngtree.com/background/20230519/original/pngtree-dark-galaxy-background-image_2669566.jpg');
+        background-image: url("https://upload.wikimedia.org/wikipedia/commons/9/99/NGC_4414_%28NASA-med%29.png");
         font-family: 'Segoe UI', sans-serif;
         color: #ffffff;
     }
@@ -502,6 +502,7 @@ st.markdown("""
         Built with ❤️ by Anu · Powered by Streamlit · <a href="https://github.com/your-repo" target="_blank" style="color:#00ffd5; text-decoration: none;">GitHub</a>
     </div>
 """, unsafe_allow_html=True)
+
 
 
 
