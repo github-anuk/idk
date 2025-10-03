@@ -68,8 +68,7 @@ st.markdown("""
     }
 
     h1, h2, h3, h4, h5, h6 {
-        color: #ffffff !important;
-        text-shadow: 0 0 12px #00e6ff;
+        color:  #000000 !important;
     }
 
     .stMarkdown, .stText, .stRadio label, .stSelectbox label, .stSlider label {
@@ -499,6 +498,7 @@ st.markdown("""
         Built with ❤️ by Anu · Powered by Streamlit · <a href="https://github.com/your-repo" target="_blank" style="color:#00ffd5; text-decoration: none;">GitHub</a>
     </div>
 """, unsafe_allow_html=True)
+
 
 
 
