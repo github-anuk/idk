@@ -63,7 +63,7 @@ st.markdown("""
 <style>
     body, .stApp {
         background: radial-gradient(circle at top left, #0b0f1a, #1a1f2e, #000000);
-        background-image: url(https://img.freepik.com/premium-photo/digital-pixel-art_780593-1489.jpg?w=2000);
+        background-image: url('https://wallpapercave.com/wp/wp3365573.jpg');
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
@@ -504,6 +504,7 @@ st.markdown("""
         Built with ❤️ by Anu · Powered by Streamlit · <a href="https://github.com/your-repo" target="_blank" style="color:#00ffd5; text-decoration: none;">GitHub</a>
     </div>
 """, unsafe_allow_html=True)
+
 
 
 
