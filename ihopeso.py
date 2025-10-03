@@ -72,12 +72,8 @@ st.markdown("""
     }
 
     h1, h2, h3, h4, h5, h6 {
-        color: #000000 !important;
+        color: #ffffff !important;
         font-weight: bold;
-    }
-        /* Make all text black */
-    html, body, [class*="css"] {
-        color: black !important;
     }
 
     p, div, span, label, .stMarkdown, .stText, .stRadio label, .stSelectbox label, .stSlider label {
@@ -149,7 +145,7 @@ st.markdown("""
         text-align: center;
         padding: 20px;
         font-size: 0.9rem;
-        color: #000000;
+        color: #ffffff;
         margin-top: 40px;
         border-top: 2px solid #00ffff;
         background-color: #1a1f2e;
@@ -508,6 +504,7 @@ st.markdown("""
         Built with ❤️ by Anu · Powered by Streamlit · <a href="https://github.com/your-repo" target="_blank" style="color:#00ffd5; text-decoration: none;">GitHub</a>
     </div>
 """, unsafe_allow_html=True)
+
 
 
 
