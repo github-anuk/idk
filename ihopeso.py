@@ -62,53 +62,54 @@ disease_images = {
 st.markdown("""
 <style>
     body, .stApp {
-        background: linear-gradient(to right, #1a2733, #2c3e50, #375a6c);
+        background: linear-gradient(to right, #e0f7fa, #cceeff, #b3e5fc);
         font-family: 'Segoe UI', sans-serif;
-        color: #e0f7fa;
+        color: #003153;
     }
 
     h1, h2, h3, h4, h5, h6 {
         color: #ffffff !important;
+        text-shadow: 0 0 12px #00e6ff;
     }
 
     .stMarkdown, .stText, .stRadio label, .stSelectbox label, .stSlider label {
-        color: #e0f7fa !important;
+        color: #003153 !important;
     }
 
     .stButton>button {
-        background-color: #00ffff;
+        background-color: #00e6ff;
         color: #003153;
         font-weight: bold;
         border: none;
         padding: 0.6em 1.4em;
         border-radius: 10px;
-        box-shadow: 0 0 12px #00ffff;
+        box-shadow: 0 0 14px #00e6ff;
         transition: background-color 0.3s ease, box-shadow 0.3s ease;
         animation: pulse 2s infinite;
     }
 
     .stButton>button:hover {
-        background-color: #00e6e6;
-        box-shadow: 0 0 16px #00ffff;
+        background-color: #80faff;
+        box-shadow: 0 0 18px #00e6ff;
         color: #001f2e;
     }
 
     .stSidebar {
-        background-color: #001f2e;
-        border-right: 2px solid #00ffff;
+        background-color: #e0f7fa;
+        border-right: 2px solid #00e6ff;
     }
 
     .stSidebar h1, .stSidebar h2, .stSidebar h3 {
-        color: #ffffff !important;
+        color: #003153 !important;
     }
 
     .stSidebar p {
-        color: #e0f7fa !important;
+        color: #003153 !important;
     }
 
     .stImage img {
         border-radius: 12px;
-        box-shadow: 0 0 16px #00ffff;
+        box-shadow: 0 0 16px #00e6ff;
     }
 
     .stAlert {
@@ -118,31 +119,35 @@ st.markdown("""
     }
 
     .stAlert[data-testid="stAlert-error"] {
-        background-color: #2c0f0f;
+        background-color: #ffe6e6;
         border-left: 5px solid #ff4e50;
+        color: #990000;
     }
 
     .stAlert[data-testid="stAlert-success"] {
-        background-color: #0f2c1f;
-        border-left: 5px solid #00ffff;
+        background-color: #e6fff9;
+        border-left: 5px solid #00e6ff;
+        color: #003153;
     }
 
     .stAlert[data-testid="stAlert-info"] {
-        background-color: #0f1f2c;
-        border-left: 5px solid #00ffff;
+        background-color: #e6f7ff;
+        border-left: 5px solid #00e6ff;
+        color: #003153;
     }
 
     .footer {
         text-align: center;
         padding: 20px;
         font-size: 0.9rem;
-        color: #e0f7fa;
+        color: #003153;
         margin-top: 40px;
-        border-top: 2px solid #00ffff;
+        border-top: 2px solid #00e6ff;
+        background-color: #f0fcff;
     }
 
     .footer a {
-        color: #00ffff;
+        color: #00e6ff;
         text-decoration: none;
     }
 
@@ -151,14 +156,14 @@ st.markdown("""
     }
 
     h1::after {
-        content: ' ✨';
-        color: #ffcc00;
+        content: ' ❄️';
+        color: #00e6ff;
     }
 
     @keyframes pulse {
-        0% { box-shadow: 0 0 10px #00ffff; }
-        50% { box-shadow: 0 0 20px #00e6e6; }
-        100% { box-shadow: 0 0 10px #00ffff; }
+        0% { box-shadow: 0 0 10px #00e6ff; }
+        50% { box-shadow: 0 0 20px #80faff; }
+        100% { box-shadow: 0 0 10px #00e6ff; }
     }
 </style>
 """, unsafe_allow_html=True)
@@ -494,6 +499,7 @@ st.markdown("""
         Built with ❤️ by Anu · Powered by Streamlit · <a href="https://github.com/your-repo" target="_blank" style="color:#00ffd5; text-decoration: none;">GitHub</a>
     </div>
 """, unsafe_allow_html=True)
+
 
 
 
