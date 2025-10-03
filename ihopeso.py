@@ -63,7 +63,7 @@ st.markdown("""
 <style>
     body, .stApp {
         background: radial-gradient(circle at top left, #0b0f1a, #1a1f2e, #000000);
-        background-image: url("https://images.unsplash.com/photo-1464983953574-0892a716854b?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8MTkyMHgxMDgwJTIwd2FsbHBhcGVyfGVufDB8fDB8fHww");
+        background-image: url(https://img.freepik.com/premium-photo/digital-pixel-art_780593-1489.jpg?w=2000);
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
@@ -273,7 +273,7 @@ def show_disease_card(disease_name):
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
         <style>
             body {{
-                background-color: #0b1f3f;
+                background-color: rgba(0, 0, 0, 0.0);
                 font-family: 'Segoe UI', sans-serif;
                 padding: 40px;
                 display: flex;
@@ -505,6 +505,7 @@ st.markdown("""
         Built with ❤️ by Anu · Powered by Streamlit · <a href="https://github.com/your-repo" target="_blank" style="color:#00ffd5; text-decoration: none;">GitHub</a>
     </div>
 """, unsafe_allow_html=True)
+
 
 
 
