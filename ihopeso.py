@@ -64,9 +64,11 @@ st.markdown("""
     body, .stApp {
         background: radial-gradient(circle at top left, #0b0f1a, #1a1f2e, #000000);
         background-image: url('https://thumbs.dreamstime.com/b/vector-illustration-coughing-man-dark-backroud-cartoon-204658207.jpg');
-        background-size: cover;
+        background-size: contain;
         background-position: center;
         background-repeat: no-repeat;
+        height: 100vh;
+
         font-family: 'Segoe UI', sans-serif;
         color: #ffffff;
     }
@@ -504,6 +506,7 @@ st.markdown("""
         Built with ❤️ by Anu · Powered by Streamlit · <a href="https://github.com/your-repo" target="_blank" style="color:#00ffd5; text-decoration: none;">GitHub</a>
     </div>
 """, unsafe_allow_html=True)
+
 
 
 
