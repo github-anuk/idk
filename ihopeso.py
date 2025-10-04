@@ -67,7 +67,7 @@ st.markdown("""
         background-size: contain;
         background-position: center;
         background-repeat: no-repeat;
-        background-color: black;
+        background-color: #2f3b49;
         height: 100vh;
 
         font-family: 'Segoe UI', sans-serif;
@@ -507,6 +507,7 @@ st.markdown("""
         Built with ❤️ by Anu · Powered by Streamlit · <a href="https://github.com/your-repo" target="_blank" style="color:#00ffd5; text-decoration: none;">GitHub</a>
     </div>
 """, unsafe_allow_html=True)
+
 
 
 
