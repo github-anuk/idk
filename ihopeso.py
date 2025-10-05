@@ -63,16 +63,13 @@ st.markdown("""
 <style>
      body, .stApp {
         background: radial-gradient(circle at top left, #0b0f1a, #1a1f2e, #000000);
-        background-image: url('https://img.freepik.com/premium-vector/vector-illustration-man-caught_253349-7659.jpg?w=2000');
-        background-size: 100,100;
+        background-image: url('https://img.freepik.com/premium-vector/cartoon-vector-illustration-cough-man-dark_253349-6869.jpg');
         background-size: contain;
-        background-position: center;
+        background-position: right;
         background-repeat: no-repeat;
-        background-color: #ffffff;
+        background-color: #2f3b49;
         height: 100vh;
 
-        font-family: 'Segoe UI', sans-serif;
-        color: #ffffff;
     }
 
     h1, h2, h3, h4, h5, h6,p {
@@ -192,7 +189,7 @@ with st.sidebar:
 st.markdown("""
     <div style='text-align: center; padding: 20px; border-bottom: 2px solid #00ffd5;'>
         <h1 style='color: #00ffd5;'>🩺 Cough Disease Analyzer</h1>
-        <p style='font-size: 18px; color: #000000; '>From waveform to wellness—every breath tells a story.</p>
+        <p style='font-size: 18px; color: #ffffff; '>From waveform to wellness—every breath tells a story.</p>
     </div>
 """, unsafe_allow_html=True)
 
@@ -508,6 +505,7 @@ st.markdown("""
         Built with ❤️ by Anu · Powered by Streamlit · <a href="https://github.com/your-repo" target="_blank" style="color:#00ffd5; text-decoration: none;">GitHub</a>
     </div>
 """, unsafe_allow_html=True)
+
 
 
 
