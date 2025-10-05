@@ -73,8 +73,19 @@ st.markdown("""
     }
 
     /* Flip content back to normal so text isn't reversed */
-    .stApp > div {
+    .stApp::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background-image: url('https://img.freepik.com/premium-vector/cartoon-vector-illustration-cough-man-dark_253349-6869.jpg');
+        background-size: 50% 100%;
+        background-position: right;
+        background-repeat: no-repeat;
         transform: scaleX(-1);
+        z-index: -1;
 
     }
 
@@ -511,6 +522,7 @@ st.markdown("""
         Built with ❤️ by Anu · Powered by Streamlit · <a href="https://github.com/your-repo" target="_blank" style="color:#00ffd5; text-decoration: none;">GitHub</a>
     </div>
 """, unsafe_allow_html=True)
+
 
 
 
