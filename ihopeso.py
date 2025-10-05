@@ -75,7 +75,7 @@ st.markdown("""
     }
 
     h1, h2, h3, h4, h5, h6 {
-        color: #ffffff !important;
+        color: #Ff0000 !important;
         font-weight: bold;
     }
 
@@ -191,7 +191,7 @@ with st.sidebar:
 st.markdown("""
     <div style='text-align: center; padding: 20px; border-bottom: 2px solid #00ffd5;'>
         <h1 style='color: #00ffd5;'>🩺 Cough Disease Analyzer</h1>
-        <p style='font-size: 18px; color: #ccc;'>From waveform to wellness—every breath tells a story.</p>
+        <p style='font-size: 18px; color: #Ff0000;'>From waveform to wellness—every breath tells a story.</p>
     </div>
 """, unsafe_allow_html=True)
 
@@ -507,6 +507,7 @@ st.markdown("""
         Built with ❤️ by Anu · Powered by Streamlit · <a href="https://github.com/your-repo" target="_blank" style="color:#00ffd5; text-decoration: none;">GitHub</a>
     </div>
 """, unsafe_allow_html=True)
+
 
 
 
