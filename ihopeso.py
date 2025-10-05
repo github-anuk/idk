@@ -71,9 +71,6 @@ st.markdown("""
         background-color: #000000;
         height: 100vh;
 
-        font-family: 'Segoe UI', sans-serif;
-        color: #ffffff;
-
     }
 
     h1, h2, h3, h4, h5, h6,p {
@@ -509,6 +506,7 @@ st.markdown("""
         Built with ❤️ by Anu · Powered by Streamlit · <a href="https://github.com/your-repo" target="_blank" style="color:#00ffd5; text-decoration: none;">GitHub</a>
     </div>
 """, unsafe_allow_html=True)
+
 
 
 
