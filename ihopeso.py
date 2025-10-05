@@ -66,10 +66,9 @@ st.markdown("""
         background-image: url('https://img.freepik.com/premium-vector/cartoon-vector-illustration-cough-man-dark_253349-6869.jpg');
         background-size: contain;
         background-position: center;
-        
         background-repeat: no-repeat;
         background-color: #2f3b49;
-        height: 100vh;
+        height: 50vh;
 
         font-family: 'Segoe UI', sans-serif;
         color: #ffffff;
@@ -508,6 +507,7 @@ st.markdown("""
         Built with ❤️ by Anu · Powered by Streamlit · <a href="https://github.com/your-repo" target="_blank" style="color:#00ffd5; text-decoration: none;">GitHub</a>
     </div>
 """, unsafe_allow_html=True)
+
 
 
 
