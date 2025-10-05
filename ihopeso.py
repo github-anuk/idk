@@ -63,7 +63,7 @@ st.markdown("""
 <style>
     body, .stApp {
         background: radial-gradient(circle at top left, #0b0f1a, #1a1f2e, #000000);
-        background-image: url('https://thumbs.dreamstime.com/b/vector-illustration-coughing-man-dark-backroud-cartoon-204658207.jpg');
+        background-image: url('https://www.google.com/imgres?q=coughing%20imogi%20cough%20images%20hd&imgurl=https%3A%2F%2Fwww.shutterstock.com%2Fimage-vector%2Femoji-emoticon-coughing-into-fist-260nw-1806896719.jpg&imgrefurl=https%3A%2F%2Fwww.shutterstock.com%2Fimage-vector%2Femoji-emoticon-coughing-into-fist-1806896719&docid=PvhKgc_FGY-jMM&tbnid=4OL0OwOdlOeCoM&vet=12ahUKEwj_24e0n42QAxUqwAIHHRrpCR0QM3oECBoQAA..i&w=341&h=280&hcb=2&ved=2ahUKEwj_24e0n42QAxUqwAIHHRrpCR0QM3oECBoQAA');
         background-size: contain;
         background-position: center;
         background-repeat: no-repeat;
@@ -507,6 +507,7 @@ st.markdown("""
         Built with ❤️ by Anu · Powered by Streamlit · <a href="https://github.com/your-repo" target="_blank" style="color:#00ffd5; text-decoration: none;">GitHub</a>
     </div>
 """, unsafe_allow_html=True)
+
 
 
 
