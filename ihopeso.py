@@ -61,16 +61,18 @@ disease_images = {
 
 st.markdown("""
 <style>
-    <style>
-    body, .stApp {
+     body, .stApp {
         background: radial-gradient(circle at top left, #0b0f1a, #1a1f2e, #000000);
-        background-image: url('https://img.freepik.com/premium-vector/cartoon-vector-illustration-cough-man-dark_253349-6869.jpg');
-        background-size: 50, 100;
-        background-position: right;
+        background-image: url('https://img.freepik.com/premium-vector/vector-illustration-man-caught_253349-7659.jpg?w=2000');
+        background-size: 100,100;
+        background-size: contain;
+        background-position: center;
         background-repeat: no-repeat;
-        background-color: #000000;
+        background-color: #ffffff;
         height: 100vh;
 
+        font-family: 'Segoe UI', sans-serif;
+        color: #ffffff;
     }
 
     h1, h2, h3, h4, h5, h6,p {
@@ -506,6 +508,7 @@ st.markdown("""
         Built with ❤️ by Anu · Powered by Streamlit · <a href="https://github.com/your-repo" target="_blank" style="color:#00ffd5; text-decoration: none;">GitHub</a>
     </div>
 """, unsafe_allow_html=True)
+
 
 
 
