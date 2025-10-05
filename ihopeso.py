@@ -63,11 +63,11 @@ st.markdown("""
 <style>
      body, .stApp {
         background: radial-gradient(circle at top left, #0b0f1a, #1a1f2e, #000000);
-        background-image: url('https://img.freepik.com/premium-vector/cartoon-vector-illustration-cough-man-dark_253349-6869.jpg');
+        background-image: url('https://static.vecteezy.com/system/resources/previews/001/254/216/non_2x/a-young-sick-man-coughing-with-covid-19-symptoms-vector.jpg');
         background-size: contain;
         background-position: right;
         background-repeat: no-repeat;
-        background-color: #2f3b49;
+        background-color: #aeb7e2;
         height: 100vh;
 
     }
@@ -505,6 +505,7 @@ st.markdown("""
         Built with ❤️ by Anu · Powered by Streamlit · <a href="https://github.com/your-repo" target="_blank" style="color:#00ffd5; text-decoration: none;">GitHub</a>
     </div>
 """, unsafe_allow_html=True)
+
 
 
 
