@@ -65,7 +65,7 @@ st.markdown("""
         background: radial-gradient(circle at top left, #0b0f1a, #1a1f2e, #000000);
         background-image: url('https://img.freepik.com/premium-vector/woman-boss-argument-icon-isometric-vector-talk-meeting_96318-146235.jpg');
         background-size: 50, 100;
-        background-position: left;
+        background-position: right;
         background-repeat: no-repeat;
         background-color: #ffffff;
         height: 100vh;
@@ -507,6 +507,7 @@ st.markdown("""
         Built with ❤️ by Anu · Powered by Streamlit · <a href="https://github.com/your-repo" target="_blank" style="color:#00ffd5; text-decoration: none;">GitHub</a>
     </div>
 """, unsafe_allow_html=True)
+
 
 
 
