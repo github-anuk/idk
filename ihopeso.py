@@ -502,11 +502,12 @@ if audio_path:
 st.markdown("""
     <hr style="border: none; height: 2px; background: linear-gradient(to right, #00ffd5, #00bfff); margin-top: 40px;">
 
-    <div style="text-align: center; padding: 20px; font-size: 0.9rem; color: #cccccc;">
+    <div style="text-align: center; padding: 20px; font-size: 0.9rem; color: #000000;">
         <p style='font-size: 18px; color: #000000;'>This is an early diagnosis that endicates that you might have this disease, for a proper diagnosis and treatment it is recommended to visit a medical practitioners</p>
         Built with ❤️ by Anu · Powered by Streamlit · <a href="https://github.com/your-repo" target="_blank" style="color:#00ffd5; text-decoration: none;">GitHub</a>
     </div>
 """, unsafe_allow_html=True)
+
 
 
 
