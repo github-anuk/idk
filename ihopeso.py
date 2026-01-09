@@ -111,7 +111,7 @@ st.markdown("""
     }
 
     .stSidebar p {
-        color: #000000 !important;
+        color: #ffffff !important;
         font-weight: bold;
     }
 
@@ -163,7 +163,7 @@ st.markdown("""
     }
 
     h1::after {
-        content: ' 🌌';
+        content: ' 🤧';
         color: #00ffff;
     }
 
@@ -505,6 +505,7 @@ st.markdown("""
         Built with ❤️ by Anu · Powered by Streamlit · <a href="https://github.com/your-repo" target="_blank" style="color:#00ffd5; text-decoration: none;">GitHub</a>
     </div>
 """, unsafe_allow_html=True)
+
 
 
 
